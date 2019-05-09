@@ -1,3 +1,4 @@
+/* A Look at the data*/
 proc print data=work.happy;
 run;
 
@@ -9,6 +10,7 @@ run;
 proc print data=happy_cluster;
 run;
 
+/* Data exploration*/
 title "Principal component analysis";
 proc princomp data=happy_cluster out=scores;
 proc print data=scores;
@@ -20,6 +22,7 @@ transform identity(Economy Family Health Freedom Trust Generosity );
 id country;
 run;
 
+/*Hierachical clustering*/
 title "Single linkage";
 proc cluster data=happy_cluster method=single rsq nonorm noeigen out=singleout;
 proc sort data=singleout;
@@ -101,6 +104,7 @@ by cluster;
 output out=meanout mean=Economy Family Health Freedom Trust Generosity;
 run;
 
+/*Non-hierachical clustering*/
 title "K-means clustering with 6 centres";
 data initials;
 set meanout;
